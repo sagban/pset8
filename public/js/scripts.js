@@ -14,7 +14,6 @@ var map;
 
 // markers for map
 var markers = [];
-//var news;
 
 // info window
 var info = new google.maps.InfoWindow();
@@ -31,7 +30,7 @@ $(function() {
             featureType: "all",
             elementType: "labels",
             stylers: [
-                {visibility: "on"}
+                {visibility: "off"}
             ]
         },
 
@@ -76,7 +75,7 @@ $(function() {
 function addMarker(place)
 {
     // TODO
-    var myLatLng = {lat: parseFloat(place.latitude),lng: parseFloat(place.longitude)};
+    var myLatLng = {lat: parseFloat(place.latitude), lng: parseFloat(place.longitude)};
     var image = {
     url: '/img/icon31.png',
     // This marker is 20 pixels wide by 32 pixels high.
@@ -91,16 +90,32 @@ function addMarker(place)
     map: map,
     icon: image,
     title: place.place_name,
+    labelContent:place.place_name+" "+place.admin_name1
     });
     marker.setMap(map);
-    $.getJSON("articles.php",function(data){
-            var news = '';
-            for(var i = 0; i < data.length; i++)
-            {
-                news = "<p>"+"<a href='data[i].link'>"+data[i].title+"</a></p>" + news;
-            }
+    var news = "<ul>";
+    var parameters = {
+        geo: place.place_name
+    };
+    $.getJSON("articles.php", parameters)
+    .done(function(data, textStatus, jqXHR) {
+
+        for(var k = 0; k < data.length; k++)
+        {
+            news += "<li><p><a href=" + data[k].link + ">"+data[k].title+"</a></p></li>";
+        }
+        news += "</ul>";
+
+        marker.addListener('click',function(){
+        showInfo(marker, news);
     });
-    marker.addListener('click', showInfo(marker, news));
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+
+        // log error to browser's console
+        console.log(errorThrown.toString());
+    });
+
 }
 
 /**
