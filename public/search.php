@@ -10,6 +10,10 @@
     $places = CS50::query("SELECT * FROM places WHERE
     MATCH(postal_code, place_name, admin_name1)
     AGAINST (?)",$geo);
+    if($places == NULL)
+    {
+        $places = CS50::query("SELECT * FROM places WHERE place_name LIKE?",$geo."%");
+    }
     // output places as JSON (pretty-printed for debugging convenience)
     header("Content-type: application/json");
     print(json_encode($places, JSON_PRETTY_PRINT));

@@ -75,6 +75,23 @@ $(function() {
 function addMarker(place)
 {
     // TODO
+    var myLatLng = {lat: parseFloat(place.latitude),lng: parseFloat(place.longitude)};
+    var image = {
+    url: '/img/nmogo.png',
+    // This marker is 20 pixels wide by 32 pixels high.
+    size: new google.maps.Size(55, 44),
+    // The origin for this image is (0, 0).
+    origin: new google.maps.Point(0, 0),
+    // The anchor for this image is the base of the flagpole at (0, 32).
+    anchor: new google.maps.Point(0, 32)
+    };
+    var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+    icon: image
+    });
+    marker.setMap(map);
+    marker.addListener("onclick", showInfo(marker,article));
 }
 
 /**
@@ -102,13 +119,14 @@ function configure()
     $("#q").typeahead({
         autoselect: true,
         highlight: true,
-        minLength: 1
+        minLength: 1,
+        hint: true
     },
     {
         source: search,
         templates: {
             empty: "no places found yet",
-            suggestion: _.template("<p>TODO</p>")
+            suggestion: _.template("<p><%- place_name %>, <b><%- admin_name1 %></b>, <%- postal_code %></p>")
         }
     });
 
