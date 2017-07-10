@@ -14,6 +14,7 @@ var map;
 
 // markers for map
 var markers = [];
+//var news;
 
 // info window
 var info = new google.maps.InfoWindow();
@@ -30,7 +31,7 @@ $(function() {
             featureType: "all",
             elementType: "labels",
             stylers: [
-                {visibility: "off"}
+                {visibility: "on"}
             ]
         },
 
@@ -77,7 +78,7 @@ function addMarker(place)
     // TODO
     var myLatLng = {lat: parseFloat(place.latitude),lng: parseFloat(place.longitude)};
     var image = {
-    url: '/img/nmogo.png',
+    url: '/img/icon31.png',
     // This marker is 20 pixels wide by 32 pixels high.
     size: new google.maps.Size(55, 44),
     // The origin for this image is (0, 0).
@@ -88,10 +89,18 @@ function addMarker(place)
     var marker = new google.maps.Marker({
     position: myLatLng,
     map: map,
-    icon: image
+    icon: image,
+    title: place.place_name,
     });
     marker.setMap(map);
-    marker.addListener("onclick", showInfo(marker,article));
+    $.getJSON("articles.php",function(data){
+            var news = '';
+            for(var i = 0; i < data.length; i++)
+            {
+                news = "<p>"+"<a href='data[i].link'>"+data[i].title+"</a></p>" + news;
+            }
+    });
+    marker.addListener('click', showInfo(marker, news));
 }
 
 /**
@@ -178,6 +187,7 @@ function hideInfo()
 function removeMarkers()
 {
     // TODO
+    //marker.setMap(null);
 }
 
 /**
