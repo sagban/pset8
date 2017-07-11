@@ -3,7 +3,7 @@
 
     // TODO
     require(__DIR__."/../includes/config.php");
-    $filename = '../../pset8/US.txt';
+    $filename = '../../pset8/IN.txt';
     if(!is_readable($filename))
     {
         return 1;

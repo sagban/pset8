@@ -72,13 +72,30 @@ html, body, #map-canvas, .container-fluid
 
     /* should be at least this width */
     min-width: 200px;
+    max-height: 350px;
+    max-width: 500px;
 
     /* allow scrollbars as needed */
     overflow: auto;
+    
 }
+
+#info a{
+    color: #333;
+    text-decoration:none;
+}
+
 #info ul
 {
     margin-bottom: 0;
+}
+#info li
+{
+    padding-top: 3px;
+    display: grid;
+}
+#info a:hover{
+    color:rgba(0, 151, 207, 0.88);
 }
 
 /* stylize typeahead.js a la http://twitter.github.io/typeahead.js/css/examples.css */

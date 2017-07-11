@@ -41,7 +41,23 @@ $(function() {
             stylers: [
                 {visibility: "off"}
             ]
+        },
+        
+        {
+            featureType: "administrative.locality",
+            elementType: "labels.text",
+            stylers: [
+                {visibility: "on"}
+            ]
+        },
+        {
+            featureType: "administrative.province",
+            elementType: "labels.text",
+            stylers: [
+                {visibility: "simplified"}
+            ]
         }
+        
 
     ];
 
@@ -75,6 +91,7 @@ $(function() {
 function addMarker(place)
 {
     // TODO
+    markers = place;
     var myLatLng = {lat: parseFloat(place.latitude), lng: parseFloat(place.longitude)};
     var image = {
     url: '/img/icon31.png',
@@ -97,6 +114,7 @@ function addMarker(place)
     var parameters = {
         geo: place.place_name
     };
+    
     $.getJSON("articles.php", parameters)
     .done(function(data, textStatus, jqXHR) {
 
@@ -202,7 +220,9 @@ function hideInfo()
 function removeMarkers()
 {
     // TODO
-    //marker.setMap(null);
+    //(markers == null){
+    //rker.setMap(null);
+    
 }
 
 /**
@@ -238,6 +258,10 @@ function showInfo(marker, content)
     {
         // http://www.ajaxload.info/
         div += "<img alt='loading' src='img/ajax-loader.gif'/>";
+    }
+    else if(content == "<ul></ul>")
+    {
+        div += "<b>No, News Day!</b>";
     }
     else
     {
