@@ -220,8 +220,7 @@ function hideInfo()
 function removeMarkers()
 {
     // TODO
-    //(markers == null){
-    //rker.setMap(null);
+    
     
 }
 
@@ -276,6 +275,10 @@ function showInfo(marker, content)
 
     // open info window (if not already open)
     info.open(map, marker);
+    marker.addListener('click',function(){
+            info.close()
+    });
+    
 }
 
 /**

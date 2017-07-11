@@ -26,9 +26,7 @@ html, body, #map-canvas, .container-fluid
 /* align form to right of pan control */
 #form
 {
-    /* distance from left edge of viewport */
-    left: 100px;
-
+    
     /* position form "absolutely" where we want it */
     position: absolute;
 
@@ -36,6 +34,10 @@ html, body, #map-canvas, .container-fluid
     top: 28px;
     width: 100%;
     
+}
+#form .form-group{
+    justify-content: center;
+    display: flex;
 }
 
 /* stylize text box */
