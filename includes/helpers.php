@@ -68,7 +68,7 @@
         // else from the Onion
         else
         {
-            $contents = @file_get_contents("http://indianexpress.com/section/india/feed/", false, $context);
+            $contents = @file_get_contents("http://www.theonion.com/feeds/rss/", false, $context);
             if ($contents !== false)
             {
                 // parse RSS

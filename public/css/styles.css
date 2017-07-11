@@ -50,6 +50,7 @@ html, body, #map-canvas, .container-fluid
     width: 325px;
     display:block;
     min-width: auto;
+    text-align:center;
     
 }
 
@@ -74,7 +75,7 @@ html, body, #map-canvas, .container-fluid
 
     /* should be at least this width */
     min-width: 200px;
-    max-height: 350px;
+    max-height: 200px;
     max-width: 500px;
 
     /* allow scrollbars as needed */

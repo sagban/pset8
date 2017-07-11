@@ -107,12 +107,14 @@ function addMarker(place)
     map: map,
     icon: image,
     title: place.place_name,
-    labelContent:place.place_name+" "+place.admin_name1
+    labelContent:place.place_name+" "+place.admin_name1,
+    labelAnchor: new google.maps.Point(20, 0),
+	labelClass: "label"
     });
     marker.setMap(map);
     var news = "<ul>";
     var parameters = {
-        geo: place.place_name
+        geo: place.postal_code
     };
     
     $.getJSON("articles.php", parameters)
@@ -126,7 +128,7 @@ function addMarker(place)
 
         marker.addListener('click',function(){
         showInfo(marker, news);
-    });
+        });
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
 
@@ -212,6 +214,7 @@ function configure()
 function hideInfo()
 {
     info.close();
+    return true;
 }
 
 /**
@@ -221,7 +224,14 @@ function removeMarkers()
 {
     // TODO
     
-    
+    // remove marker from markers
+    for (var i = 0, n = markers.length; i < n; i++)
+    {
+	markers[i].setMap(null);
+    }
+
+    // reset length to 0
+    markers.length = 0;
 }
 
 /**
@@ -275,9 +285,6 @@ function showInfo(marker, content)
 
     // open info window (if not already open)
     info.open(map, marker);
-    marker.addListener('click',function(){
-            info.close()
-    });
     
 }
 
@@ -314,4 +321,6 @@ function update()
          // log error to browser's console
          console.log(errorThrown.toString());
      });
+     $("#form").show();
+     hideInfo();
 }
