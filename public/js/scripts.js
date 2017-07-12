@@ -74,7 +74,6 @@ $(function() {
  */
 function addMarker(place)
 {
-    // TODO
     markers = place;
     var myLatLng = {lat: parseFloat(place.latitude), lng: parseFloat(place.longitude)};
     var image = {
@@ -86,6 +85,7 @@ function addMarker(place)
     // The anchor for this image is the base of the flagpole at (0, 32).
     anchor: new google.maps.Point(0, 32)
     };
+    // initialize marker
     var marker = new google.maps.Marker({
     position: myLatLng,
     map: map,
@@ -98,15 +98,18 @@ function addMarker(place)
         geo: place.postal_code
     };
     
+    // request to server
+    
     $.getJSON("articles.php", parameters)
     .done(function(data, textStatus, jqXHR) {
 
+        // iterate over rss data
         for(var k = 0; k < data.length; k++)
         {
             news += "<li><p><a href=" + data[k].link + ">"+data[k].title+"</a></p></li>";
         }
         news += "</ul>";
-
+        // on click call showInfo
         marker.addListener('click',function(){
         showInfo(marker, news);
         });
