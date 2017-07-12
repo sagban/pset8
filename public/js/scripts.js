@@ -25,40 +25,24 @@ $(function() {
     // https://developers.google.com/maps/documentation/javascript/styling
     var styles = [
 
-        // hide Google's labels
-        {
-            featureType: "all",
-            elementType: "labels",
-            stylers: [
-                {visibility: "off"}
-            ]
-        },
-
-        // hide roads
-        {
-            featureType: "road",
-            elementType: "geometry",
-            stylers: [
-                {visibility: "off"}
-            ]
-        },
-        
-        {
-            featureType: "administrative.locality",
-            elementType: "labels.text",
-            stylers: [
-                {visibility: "on"}
-            ]
-        },
-        {
-            featureType: "administrative.province",
-            elementType: "labels.text",
-            stylers: [
-                {visibility: "simplified"}
-            ]
-        }
-        
-
+            { "elementType": "geometry", "stylers": [ { "color": "#f5f5f5" } ] },
+            { "elementType": "labels.icon", "stylers": [ { "visibility": "off" } ] },
+            { "elementType": "labels.text.fill", "stylers": [ { "color": "#616161" } ] },
+            { "elementType": "labels.text.stroke", "stylers": [ { "color": "#f5f5f5" } ] },
+            { "featureType": "administrative.land_parcel", "stylers": [ { "visibility": "off" } ] },
+            { "featureType": "administrative.land_parcel", "elementType": "labels.text.fill", "stylers": [ { "color": "#bdbdbd" } ] },
+            { "featureType": "administrative.locality", "elementType": "geometry.fill", "stylers": [ { "visibility": "off" }, { "weight": 0.5 } ] },
+            { "featureType": "administrative.neighborhood", "stylers": [ { "visibility": "off" } ] },
+            { "featureType": "poi", "elementType": "geometry", "stylers": [ { "color": "#eeeeee" } ] },
+            { "featureType": "poi", "elementType": "labels.text", "stylers": [ { "visibility": "off" } ] },
+            { "featureType": "poi.park", "elementType": "geometry", "stylers": [ { "color": "#e5e5e5" } ] },
+            { "featureType": "poi.park", "elementType": "geometry.fill", "stylers": [ { "color": "#c9e3c9" } ] },
+            { "featureType": "poi.park", "elementType": "labels.text.fill", "stylers": [ { "color": "#9e9e9e" } ] },
+            { "featureType": "road", "stylers": [ { "visibility": "off" } ] },
+            { "featureType": "transit.line", "elementType": "geometry", "stylers": [ { "color": "#e5e5e5" } ] },
+            { "featureType": "transit.station", "elementType": "geometry", "stylers": [ { "color": "#eeeeee" } ] },
+            { "featureType": "water", "elementType": "geometry", "stylers": [ { "color": "#d7e1e5" } ] },
+            
     ];
 
     // options for map
@@ -106,10 +90,7 @@ function addMarker(place)
     position: myLatLng,
     map: map,
     icon: image,
-    title: place.place_name,
-    labelContent:place.place_name+" "+place.admin_name1,
-    labelAnchor: new google.maps.Point(20, 0),
-	labelClass: "label"
+    title: place.place_name
     });
     marker.setMap(map);
     var news = "<ul>";
